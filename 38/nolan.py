@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import re
 
 # from OMDB
 xmlstring = '''<?xml version="1.0" encoding="UTF-8"?>
@@ -13,15 +14,44 @@ xmlstring = '''<?xml version="1.0" encoding="UTF-8"?>
 
 def get_tree():
     """You probably want to use ET.fromstring"""
-    pass
+    root = ET.fromstring(xmlstring)
+    return root
 
 
 def get_movies():
     """Call get_tree and retrieve all movie titles, return a list or generator"""
-    pass
 
+    for child in get_tree():
+        yield child.attrib['title']
+
+
+def _get_runtime_helper(child):
+
+
+    return int(re.search(r'\d+',child.attrib['runtime']).group())
 
 def get_movie_longest_runtime():
     """Call get_tree again and return the movie title for the movie with the longest
        runtime in minutes, for latter consider adding a _get_runtime helper"""
-    pass
+
+    tree = get_tree()
+
+    longest_title = None
+    longest_run_time = float("-inf")
+    for child in get_tree():
+        if _get_runtime_helper(child) > longest_run_time:
+            longest_run_time = _get_runtime_helper(child)
+            longest_title = child.attrib['title']
+
+
+    return longest_title
+
+
+
+
+
+
+
+
+
+
