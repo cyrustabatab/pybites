@@ -1,3 +1,13 @@
+from dataclasses import dataclass
+
+
+from dataclasses import dataclass
+
+
+
+
+
+
 class Employee:
     """Simple Employee class
 
@@ -8,6 +18,11 @@ class Employee:
     :param wage: Float of hourly pay
     :param weekly_pay: Property which returns a string for weekly pay
     """
+    first_name: str
+    last_name: str
+    days_per_week: int
+    hours_per_day: float
+    wage: float
 
     def __init__(self, first_name: str, last_name: str, days_per_week: int,
             hours_per_day:int, wage: float):
