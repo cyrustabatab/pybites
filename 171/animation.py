@@ -13,7 +13,10 @@ def spinner(seconds):
     
     cycles = cycle(SPINNER_STATES)
 
-    while True:
+
+    start_time = time()
+
+    while time() - start_time <= seconds:
         s = next(cycles)
         print(s,end='\r')
         
