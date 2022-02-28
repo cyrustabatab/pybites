@@ -17,4 +17,24 @@ def metropolis_hastings(
     Returns:
         (np.ndarray): Drawn samples from the target distribution.
     """
-    pass
+
+    if n_samples <= 0:
+        raise ValueError()
+    
+    values = []
+    x_t = x_0
+    for _ in range(n_samples):
+        x_next = np.random.normal(x_t)
+        acceptance_ratio = f(x_next)/f(x_t)
+        u = np.random.uniform()
+        if u <= acceptance_ratio:
+            x_t = x_next
+
+        values.append(x_t)
+
+    
+    return np.array(values)
+
+
+
+
